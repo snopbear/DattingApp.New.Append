@@ -1,21 +1,47 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ValuesComponent } from './values/values.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './navigation/header/header.component';
+import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
+
+import { PublicComponent } from './layout/public/public.component';
+import { SecureComponent } from './layout/secure/secure.component';
+import { LoginComponent } from './public/login/login.component';
+import { HomeComponent } from './secure/home/home.component';
+import { AuthGuard } from './common/auth.guard';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './shared/modules/material/material.module';
+import { RegisterComponent } from './public/register/register.component';
+import { ErrorInterceptorProvider } from './shared/services/interceptors/error.interceptor';
 
 @NgModule({
    declarations: [
       AppComponent,
-      ValuesComponent
+      HeaderComponent,
+      SidenavListComponent,
+      LoginComponent,
+      RegisterComponent,
+      HomeComponent,
+      PublicComponent,
+      SecureComponent
    ],
    imports: [
       BrowserModule,
       AppRoutingModule,
-      HttpClientModule
+      HttpClientModule,
+      BrowserAnimationsModule,
+      MaterialModule,
+      FormsModule,
+      ReactiveFormsModule
+
    ],
-   providers: [],
+   providers: [
+      AuthGuard,
+      ErrorInterceptorProvider
+      ],
    bootstrap: [
       AppComponent
    ]

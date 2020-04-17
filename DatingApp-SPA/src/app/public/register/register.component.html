@@ -1,0 +1,77 @@
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
+
+    <form class="example-form" [formGroup]='form'>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Username" formControlName='username'  [ngClass]="form.controls['username'].invalid ? 'is-invalid' : 'invalid'">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="password" matInput placeholder="Password" formControlName='password'
+          [ngClass]="form.controls['password'].invalid ? 'is-invalid' : 'invalid'">
+      </mat-form-field>
+      <div>
+        <mat-error class="col"
+          [ngClass]="form.controls['password'].hasError('required') || form.controls['password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+          <i class="material-icons">{{ form.controls['password'].hasError('required') ||
+      form.controls['password'].hasError('minlength') ? 'cancel' :
+      'check_circle' }}</i>
+          Must be at least 8 characters!
+        </mat-error>
+        <mat-error class="col"
+          [ngClass]="form.controls['password'].hasError('required') || form.controls['password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+          <i class="material-icons">{{ form.controls['password'].hasError('required') ||
+      form.controls['password'].hasError('hasNumber') ? 'cancel' :
+      'check_circle' }}</i>
+          Must contain at least 1 number!
+        </mat-error>
+        <mat-error class="col"
+          [ngClass]="form.controls['password'].hasError('required') || form.controls['password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+          <i class="material-icons">{{ form.controls['password'].hasError('required') ||
+      form.controls['password'].hasError('hasCapitalCase') ? 'cancel' :
+      'check_circle' }}</i>
+          Must contain at least 1 in Capital Case!
+        </mat-error>
+        <mat-error class="col"
+          [ngClass]="form.controls['password'].hasError('required') || form.controls['password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+          <i class="material-icons">{{ form.controls['password'].hasError('required') ||
+      form.controls['password'].hasError('hasSmallCase') ? 'cancel' :
+      'check_circle' }}</i>
+          Must contain at least 1 Letter in Small Case!
+        </mat-error>
+        <mat-error class="col"
+          [ngClass]="form.controls['password'].hasError('required') || form.controls['password'].hasError('hasSpecialCharacters') ? 'text-danger' : 'text-success'">
+          <i class="material-icons">{{ form.controls['password'].hasError('required') ||
+      form.controls['password'].hasError('hasSpecialCharacters') ? 'cancel' :
+      'check_circle' }}</i>
+          Must contain at least 1 Special Character!
+        </mat-error>
+      </div>
+
+      <mat-form-field>
+        <mat-error for="confirmPassword" [ngClass]="form.controls['confirmPassword'].invalid ? 'text-danger' : ''">Confirm
+          Password:</mat-error>
+        <input id="confirmPassword" matInput formControlName="confirmPassword" type="password" 
+          [ngClass]="form.controls['confirmPassword'].invalid ? 'is-invalid' : 'invalid'">
+
+
+          <br>
+          <br>
+        <mat-error class="text-danger" *ngIf="form.controls['confirmPassword'].hasError('required')">
+          Password is Required!
+        </mat-error>
+        <mat-error class="text-danger" *ngIf="form.controls['confirmPassword'].hasError('NoPassswordMatch')">
+          Password do not match
+        </mat-error>
+      </mat-form-field>
+
+      <div class="button">
+        <button type="button" class="btn btn-primary active" (click)="submit()" [disabled]="!form.valid">Submit</button>
+      </div>
+      <div>
+        <a routerLink="/login" color="primary">Login</a>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
