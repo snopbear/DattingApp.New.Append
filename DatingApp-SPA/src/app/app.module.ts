@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './shared/modules/material/material.module';
 import { RegisterComponent } from './public/register/register.component';
 import { ErrorInterceptorProvider } from './shared/services/interceptors/error.interceptor';
+import { AlertifyService } from './shared/services/alerts/alertify/alertify.service';
+import { NgxBootstrapModule } from './shared/modules/ngx-bootstrap/ngx-bootstrap.module';
 
 @NgModule({
    declarations: [
@@ -34,6 +36,7 @@ import { ErrorInterceptorProvider } from './shared/services/interceptors/error.i
       HttpClientModule,
       BrowserAnimationsModule,
       MaterialModule,
+      NgxBootstrapModule,
       FormsModule,
       ReactiveFormsModule
 

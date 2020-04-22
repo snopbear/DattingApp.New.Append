@@ -5,6 +5,7 @@ import { ValidationErrors } from 'src/app/shared/validation/gerneric-validation/
 import { AuthService } from 'src/app/shared/services/custom-services/auth/auth.service';
 import { Register } from 'src/app/shared/models/register/register';
 import { Router } from '@angular/router';
+import { AlertifyService } from 'src/app/shared/services/alerts/alertify/alertify.service';
 
 
 
@@ -62,7 +63,10 @@ export class RegisterComponent implements OnInit {
     this.register.password = this.form.value.password;
   }
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService,
+              private alertifyService: AlertifyService) {
     this.form = this.initForm();
   }
 
@@ -75,10 +79,11 @@ export class RegisterComponent implements OnInit {
     debugger;
     this.mapFormValues();
     this.authService.register(this.register).subscribe(next => {
+      this.alertifyService.message('Registeration Successful');
       this.router.navigateByUrl('/login');
     },
       error => {
-        console.log(error);
+        this.alertifyService.error(error);
       });
   }
 }

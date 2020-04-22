@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/custom-services/auth/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -7,14 +8,12 @@ import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/cor
 export class HeaderComponent implements OnInit, OnDestroy {
   @Output() sidenavToggle = new EventEmitter<void>();
   isAuth = false;
- //  authSubscription: Subscription;
 
-  constructor() { }
+
+  constructor(public authService: AuthService) { }
 
   ngOnInit() {
-    // this.authSubscription = this.authService.authChange.subscribe(authStatus => {
-    //   this.isAuth = authStatus;
-    // });
+
   }
 
   onToggleSidenav() {
@@ -26,7 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.authSubscription.unsubscribe();
+   
   }
 
 }
