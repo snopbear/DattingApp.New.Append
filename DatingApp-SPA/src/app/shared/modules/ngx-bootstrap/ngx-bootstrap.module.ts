@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CommonModule } from '@angular/common';
 @NgModule({
   imports: [
-    BsDatepickerModule.forRoot(),
-    DatepickerModule.forRoot()
+    CommonModule,
+    BsDatepickerModule.forRoot()
   ],
   exports: [
-    BsDatepickerModule,
-    DatepickerModule
+    BsDatepickerModule
+
   ],
   declarations: [
 
