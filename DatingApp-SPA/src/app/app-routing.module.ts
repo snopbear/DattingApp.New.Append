@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './common/auth.guard';
+
 import { PublicComponent } from './layout/public/public.component';
 import { LoginComponent } from './public/login/login.component';
 import { SecureComponent } from './layout/secure/secure.component';
 import { HomeComponent } from './secure/home/home.component';
 import { RegisterComponent } from './public/register/register.component';
+import { ListsComponent } from './secure/lists/lists.component';
+import { MemberListComponent } from './secure/member-list/member-list.component';
+import { MessagesComponent } from './secure/messages/messages.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 
 /**
@@ -21,8 +25,15 @@ const routes: Routes = [
     ]
   },
   {
-    path: '', component: SecureComponent, canActivate: [AuthGuard],
-    data: { title: 'Secure Views' }, children: [{ path: 'home', component: HomeComponent }]
+    path: '', component: SecureComponent,
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always',
+    data: { title: 'Secure Views' }, children: [
+      { path: '', component: HomeComponent },
+      { path: 'lists', component: ListsComponent },
+      { path: 'members', component: MemberListComponent },
+      { path: 'messages', component: MessagesComponent },
+    ]
   },
   { path: '**', redirectTo: 'login' }
 ];

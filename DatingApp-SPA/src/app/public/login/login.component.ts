@@ -13,21 +13,24 @@ export class LoginComponent implements OnInit {
 
   login = {} as Login;
   constructor(private router: Router,
-              private authService: AuthService,
-              private  alertifyService: AlertifyService) { }
+    private authService: AuthService,
+    private alertifyService: AlertifyService) { }
   ngOnInit() { }
 
   submit(): void {
     this.authService.login(this.login).subscribe(next => {
-      this.router.navigateByUrl('/home');
+
     },
       error => {
-       this.alertifyService.error(error);
+        this.alertifyService.error(error);
+      },
+      () => {
+        this.router.navigate(['/home']);
       });
   }
 
   loggedin() {
-   return this.authService.loggedIn();
+    return this.authService.loggedIn();
     // const token = localStorage.getItem('token');
     // return !!token;
   }
@@ -35,5 +38,6 @@ export class LoginComponent implements OnInit {
   logout() {
     localStorage.removeItem('token');
     this.alertifyService.message('logged out');
+    this.router.navigate(['/login']);
   }
 }
