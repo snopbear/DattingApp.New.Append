@@ -1,23 +1,49 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './shared/modules/material/material.module';
+
+import { ErrorInterceptorProvider } from './shared/services/interceptors/error/error.interceptor';
+import { NgxBootstrapModule } from './shared/modules/ngx-bootstrap/ngx-bootstrap.module';
+import { AuthGuard } from './shared/guards/auth/auth.guard';
+import { AuthorizationInterceptor } from './shared/services/interceptors/authorization/authorization.interceptor';
+import { AddHeaderInterceptor } from './shared/services/interceptors/add-header/add-header.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppComponent } from './app.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { PublicComponent } from './layout/public/public.component';
 import { SecureComponent } from './layout/secure/secure.component';
 import { LoginComponent } from './public/login/login.component';
 import { HomeComponent } from './secure/home/home.component';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from './shared/modules/material/material.module';
 import { RegisterComponent } from './public/register/register.component';
-import { ErrorInterceptorProvider } from './shared/services/interceptors/error.interceptor';
-import { NgxBootstrapModule } from './shared/modules/ngx-bootstrap/ngx-bootstrap.module';
-import { AuthGuard } from './shared/guards/auth.guard';
+import { MemberListComponent } from './secure/members/member-list/member-list.component';
+import { ListsComponent } from './secure/lists/lists.component';
+import { MessagesComponent } from './secure/messages/messages.component';
+import { MemberCardComponent } from './secure/members/member-card/member-card.component';
+import { MemberDetailsComponent } from './secure/members/member-details/member-details.component';
 
+
+import { MemberDetailResolver } from './shared/resolvers/member-detail/member-detail.resolver';
+import { MemberListResolver } from './shared/resolvers/member-list/member-list.resolver';
+import { MemberEditComponent } from './secure/members/member-edit/member-edit.component';
+import { MemberEditResolver } from './shared/resolvers/member-edit/member-edit.resolver';
+import { PreventUnsavedChanges } from './shared/guards/prevent-unsaved-changes/prevent-unsaved-changes.guard';
+
+
+
+
+export function tokenGetter(){
+   return localStorage.getItem('token');
+
+}
 @NgModule({
    declarations: [
       AppComponent,
@@ -27,22 +53,43 @@ import { AuthGuard } from './shared/guards/auth.guard';
       RegisterComponent,
       HomeComponent,
       PublicComponent,
-      SecureComponent
+      SecureComponent,
+      MemberListComponent,
+      ListsComponent,
+      MessagesComponent,
+      MemberCardComponent,
+      MemberDetailsComponent,
+      MemberEditComponent
    ],
    imports: [
       BrowserModule,
+      CommonModule,
       AppRoutingModule,
       HttpClientModule,
       BrowserAnimationsModule,
       MaterialModule,
-      NgxBootstrapModule,
+      // NgxBootstrapModule,
       FormsModule,
-      ReactiveFormsModule
-
+      ReactiveFormsModule,
+      NgxGalleryModule,
+      JwtModule.forRoot({
+         config: {
+           // tslint:disable-next-line:object-literal-shorthand
+           tokenGetter: tokenGetter,
+           whitelistedDomains: ['localhost:5000'],
+           blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+       })
    ],
    providers: [
       AuthGuard,
-      ErrorInterceptorProvider
+      PreventUnsavedChanges,
+      ErrorInterceptorProvider,
+      MemberDetailResolver,
+      MemberListResolver,
+      MemberEditResolver,
+      // { provide: HTTP_INTERCEPTORS, useClass: AuthorizationInterceptor, multi: true }, // Handle Http headers
+      { provide: HTTP_INTERCEPTORS, useClass: AddHeaderInterceptor, multi: true }, // Handle Http headers
       ],
    bootstrap: [
       AppComponent

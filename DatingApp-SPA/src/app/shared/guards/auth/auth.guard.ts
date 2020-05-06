@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { AuthService } from '../services/custom-services/auth/auth.service';
-import { AlertifyService } from '../services/alerts/alertify/alertify.service';
+import { AuthService } from '../../services/custom-services/auth/auth.service';
+import { AlertifyService } from '../../services/alerts/alertify/alertify.service';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     // tslint:disable-next-line:no-debugger
-    debugger;
+
     if (this.authService.loggedIn()) {
       return true;
     } else {

@@ -1,10 +1,9 @@
-﻿  
-using System.Net;
+﻿using System.Net;
 using System.Text;
 using AutoMapper;
 using DatingApp.API.Data;
-using DatingApp.API.Models;
 using DatingApp.API.Helpers;
+using DatingApp.API.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -38,15 +37,21 @@ namespace DatingApp.API
             {
                 x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(opt =>
+                {
+                    opt.SerializerSettings.ReferenceLoopHandling =
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
+                services.AddAutoMapper();
             services.AddCors();
 
-
-
+            // seeders
+            services.AddTransient<Seed>();
             // Register Repositories
 
             services.AddScoped<IAuthRepository, AuthRepository>();
-  services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            services.AddScoped<IDatingRepository, DatingRepository>();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -63,7 +68,7 @@ namespace DatingApp.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -89,8 +94,9 @@ namespace DatingApp.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //app.UseHsts();
             }
-
-        //   app.UseHttpsRedirection();
+            // Seeders 
+            // seeder.SeedUsers();
+            //app.UseHttpsRedirection();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
              app.UseAuthentication();
             app.UseMvc();

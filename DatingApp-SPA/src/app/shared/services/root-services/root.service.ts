@@ -29,8 +29,7 @@ getRoot(url: string, data?: any): Observable<any> {
  * @return {Observable} Observable of response, comes from the end point
  */
 postRoot(url: string, data: any): Observable<any> {
-  // tslint:disable-next-line:no-debugger
-  debugger;
+
   return this.http.post(environment.serverUrl + url, data);
 }
 

@@ -14,8 +14,7 @@ export class ValuesComponent implements OnInit {
   ngOnInit() {
     this.http.get('http://localhost:5000/api/values').subscribe(
       (response: any[]) => {
-        // tslint:disable-next-line:no-debugger
-        debugger;
+
         this.result = response;
       }
     );

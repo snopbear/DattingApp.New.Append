@@ -12,7 +12,7 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
 
   decodedToken: any;
-  
+
   url = {
     login: 'auth/login',
     register: 'auth/register'
@@ -42,5 +42,10 @@ export class AuthService {
   loggedIn() {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  loggOut(): boolean {
+    const token = localStorage.removeItem('token');
+    return true;
   }
 }

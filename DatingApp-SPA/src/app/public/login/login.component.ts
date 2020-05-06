@@ -20,12 +20,10 @@ export class LoginComponent implements OnInit {
   submit(): void {
     this.authService.login(this.login).subscribe(next => {
 
+      this.router.navigateByUrl('/home');
     },
       error => {
         this.alertifyService.error(error);
-      },
-      () => {
-        this.router.navigate(['/home']);
       });
   }
 

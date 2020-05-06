@@ -76,7 +76,7 @@ export class RegisterComponent implements OnInit {
 
   submit(): void {
     // tslint:disable-next-line:no-debugger
-    debugger;
+
     this.mapFormValues();
     this.authService.register(this.register).subscribe(next => {
       this.alertifyService.message('Registeration Successful');

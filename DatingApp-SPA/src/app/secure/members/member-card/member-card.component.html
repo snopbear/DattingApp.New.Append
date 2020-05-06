@@ -1,0 +1,40 @@
+<mat-card class="card">
+
+  <img mat-card-image src="{{user.photoUrl}}" alt="{{user.knownAs}}">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title> {{user.knownAs}}, {{user.age}}</mat-card-title>
+    <mat-card-subtitle></mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p class="card-text text-muted text-center">
+      {{user.city}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="member-icons">
+    <ul class="list-inline   animate text-center">
+      <li class="list-inline-item">
+        <button mat-mini-fab color="primary" aria-label="Example icon-button with a heart icon" [routerLink]="['/members/',user.id]" routerLinkActive="router-link-active" >
+          <mat-icon>how_to_reg</mat-icon>
+        </button>
+      </li>
+
+      <li class="list-inline-item">
+
+        <button mat-mini-fab color="primary" aria-label="Example icon-button with a heart icon">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </li>
+
+      <li class="list-inline-item">
+
+        <button mat-mini-fab color="primary" aria-label="Example icon-button with a heart icon">
+          <mat-icon>mail_outline</mat-icon>
+        </button>
+      </li>
+    </ul>
+
+
+
+  </mat-card-actions>
+</mat-card>

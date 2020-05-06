@@ -11,10 +11,18 @@
     <mat-icon>fitness_center</mat-icon>
     <span class="nav-caption">Messages</span>
   </a>
+
+  <a mat-list-item [routerLink]="['/member/edit']" routerLinkActive="active"   (click)="onClose()">
+    <mat-icon>fitness_center</mat-icon>
+    <span class="nav-caption">Edit Profile</span>
+  </a>
+
   <mat-list-item>
     <button mat-icon-button (click)="onLogout()" >
       <mat-icon>eject</mat-icon>
       <span class="nav-caption">Logout</span>
     </button>
   </mat-list-item>
+
+  
 </mat-nav-list>
