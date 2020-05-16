@@ -36,6 +36,12 @@ import { MemberListResolver } from './shared/resolvers/member-list/member-list.r
 import { MemberEditComponent } from './secure/members/member-edit/member-edit.component';
 import { MemberEditResolver } from './shared/resolvers/member-edit/member-edit.resolver';
 import { PreventUnsavedChanges } from './shared/guards/prevent-unsaved-changes/prevent-unsaved-changes.guard';
+import { ProductListFlatGridComponent } from './secure/rxjs-module/product-list-flat-grid/product-list-flat-grid.component';
+import { CombiningStreamsComponent } from './secure/rxjs-module/combining-streams/combining-streams.component';
+import { ReactToActionComponent } from './secure/rxjs-module/react-to-action/react-to-action.component';
+import { ParentComponent } from './secure/rxjs-module/parent-to-child/parent/parent.component';
+import { ChildComponent } from './secure/rxjs-module/parent-to-child/child/child.component';
+import { ContainerComponent } from './secure/rxjs-module/parent-to-child/container/container.component';
 
 
 
@@ -59,7 +65,13 @@ export function tokenGetter(){
       MessagesComponent,
       MemberCardComponent,
       MemberDetailsComponent,
-      MemberEditComponent
+      MemberEditComponent,
+      ProductListFlatGridComponent,
+      CombiningStreamsComponent,
+      ReactToActionComponent,
+      ParentComponent,
+      ChildComponent,
+      ContainerComponent
    ],
    imports: [
       BrowserModule,

@@ -12,5 +12,10 @@ namespace DatingApp.API.Data
         public DbSet<Photo> Photos { get; set; }
         
         
+        // Deboura Corata
+        
+        public DbSet<ProductCategory> ProductCategorys { get; set; } 
+        public DbSet<Product> Products { get; set; }
+        
     }
 }

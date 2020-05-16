@@ -16,6 +16,17 @@
     <mat-icon>fitness_center</mat-icon>
     <span class="nav-caption">Edit Profile</span>
   </a>
+<hr>
+<hr>
+<a mat-list-item [routerLink]="['/products']" routerLinkActive="active"   (click)="onClose()">
+  <mat-icon>fitness_center</mat-icon>
+  <span class="nav-caption">Messages</span>
+</a>
+
+<a mat-list-item [routerLink]="['/productscombine']" routerLinkActive="active"   (click)="onClose()">
+  <mat-icon>fitness_center</mat-icon>
+  <span class="nav-caption">Messages</span>
+</a>
 
   <mat-list-item>
     <button mat-icon-button (click)="onLogout()" >

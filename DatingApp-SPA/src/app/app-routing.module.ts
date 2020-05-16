@@ -19,6 +19,11 @@ import { MemberListResolver } from './shared/resolvers/member-list/member-list.r
 import { MemberEditComponent } from './secure/members/member-edit/member-edit.component';
 import { MemberEditResolver } from './shared/resolvers/member-edit/member-edit.resolver';
 import { PreventUnsavedChanges } from './shared/guards/prevent-unsaved-changes/prevent-unsaved-changes.guard';
+import { ProductListFlatGridComponent } from './secure/rxjs-module/product-list-flat-grid/product-list-flat-grid.component';
+import { CombiningStreamsComponent } from './secure/rxjs-module/combining-streams/combining-streams.component';
+import { ReactToActionComponent } from './secure/rxjs-module/react-to-action/react-to-action.component';
+import { ParentComponent } from './secure/rxjs-module/parent-to-child/parent/parent.component';
+import { ContainerComponent } from './secure/rxjs-module/parent-to-child/container/container.component';
 
 
 /**
@@ -44,9 +49,13 @@ const routes: Routes = [
       { path: 'members/:id', component: MemberDetailsComponent, resolve: {user: MemberDetailResolver} },
       { path: 'member/edit', component: MemberEditComponent , resolve: {user: MemberEditResolver},  canDeactivate: [PreventUnsavedChanges]},
       { path: 'messages', component: MessagesComponent },
-      { path: 'card', component: MemberCardComponent }
+      { path: 'card', component: MemberCardComponent },
+      { path: 'products', component: ProductListFlatGridComponent },
+      { path: 'productscombine', component: CombiningStreamsComponent },
+      { path: 'productsreact', component: ReactToActionComponent },
+      { path: 'container', component: ContainerComponent },
 
-
+      
     ]
   },
   { path: '**', redirectTo: 'login' }
